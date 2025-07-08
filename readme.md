@@ -1,0 +1,1 @@
+# simple authentication app based on Django
