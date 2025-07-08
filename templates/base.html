@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}ISTOK — Intelligent Stream of Technology & Open Knowledge{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #0D1B2A;
+            color: #E0E6ED;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #111827;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #00BFFF;
+            margin-bottom: 2rem;
+        }
+
+        .nav-link {
+            display: block;
+            margin: 0.5rem 0;
+            color: #E0E6ED;
+            text-decoration: none;
+        }
+
+        .nav-link:hover {
+            color: #6C63FF;
+        }
+
+        .logout {
+            margin-top: auto;
+            color: #FF5C5C;
+        }
+
+        .main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            height: 60px;
+            background-color: #1E293B;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .topbar h2 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        a.button {
+            background-color: #00BFFF;
+            padding: 0.4rem 1rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        a.button:hover {
+            background-color: #0095cc;
+        }
+
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div>
+            <div class="logo">ISTOK</div>
+            <a href="{% url 'home' %}" class="nav-link">Главная</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'account_logout' %}" class="nav-link logout">Выйти</a>
+            {% else %}
+                <a href="{% url 'account_login' %}" class="nav-link">Вход</a>
+                <a href="{% url 'account_signup' %}" class="nav-link">Регистрация</a>
+            {% endif %}
+        </div>
+        <div style="font-size: 0.8rem; color: #64748B;">
+            <p style="margin: 0;">© ISTOK</p>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main">
+        <div class="topbar">
+            <h2>{% block page_title %}Добро пожаловать{% endblock %}</h2>
+        </div>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>

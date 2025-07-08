@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_title %}Главная страница{% endblock %}
+
+{% block content %}
+    <h3>ISTOK: Intelligent Stream of Technology & Open Knowledge</h3>
+    <p>Добро пожаловать в инженерную цифровую экосистему нового поколения.</p>
+
+    {% if user.is_authenticated %}
+        <p><strong>{{ user.username }}</strong>, вы вошли в систему.</p>
+        <p>Ваши роли: {{ user.get_roles|join:", " }}</p>
+    {% else %}
+        <p>Чтобы начать работу, войдите или зарегистрируйтесь:</p>
+        <a href="{% url 'account_login' %}" class="button">Войти</a>
+        <a href="{% url 'account_signup' %}" class="button">Регистрация</a>
+    {% endif %}
+{% endblock %}
